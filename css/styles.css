@@ -1,0 +1,871 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #d3d3d3;
+    margin: 0;
+    padding: 0;
+    color: #000;
+}
+
+/* Global Explorer Theme for Flight Search Section */
+.flight-search {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 3rem 0;
+    min-height: 400px; /* Ensure enough height to center vertically */
+    height: 100vh;
+}
+
+.flight-search-form {
+    width: 100%;
+    max-width: 700px;
+    background: #5bd5d5; /* deep green */
+    border-radius: 20px;
+    padding: 2rem 3rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    color: #f0e68c; /* khaki */
+    font-family: 'Crimson Text', serif;
+}
+
+.flight-search-form h2 {
+    text-align: center;
+    font-family: 'Crimson Text', serif;
+    font-weight: 900;
+    font-size: 2.5rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+    text-shadow: 1px 1px 2px #000;
+}
+
+/* Trip type selector */
+.trip-type {
+    flex-basis: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    background: #556b2f; /* earthy olive */
+    border-radius: 25px;
+    padding: 0.5rem;
+}
+
+.trip-type label {
+    cursor: pointer;
+    font-weight: 700;
+    font-family: 'Times New Roman', Times, serif, 'Crimson Text', serif;
+    color: #f0e68c;
+}
+
+.trip-type input[type="radio"] {
+    margin-right: 0.5rem;
+}
+
+/* Input labels and fields */
+.flight-inputs label,
+.flight-search-form label {
+    flex: 1 1 45%;
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    color: #f0e68c;
+}
+
+.flight-search-form input[type="text"],
+.flight-search-form input[type="date"],
+.flight-search-form select {
+    background: #556b2f;
+    border: none;
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: #f0e68c;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    box-shadow: inset 0 0 5px #2f4f4f;
+}
+
+/* Disabled return date input */
+.flight-search-form input[type="date"][disabled] {
+    background: #778899;
+}
+
+/* Special fare checkbox */
+.special-fare {
+    flex-basis: 100%;
+    color: #f0e68c;
+    font-weight: 600;
+}
+
+/* Search button */
+.search-btn.prominent-btn {
+    background: linear-gradient(90deg, #ff4500, #ff6347); /* fiery orange to tomato */
+    box-shadow: 0 4px 15px rgba(255, 69, 0, 0.7);
+    font-weight: 900;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.2rem;
+    border-radius: 20px;
+    transition: background 0.5s ease;
+}
+
+.search-btn.prominent-btn:hover {
+    background: linear-gradient(90deg, #ff6347, #ff4500);
+}
+
+/* Additional styles for animated plane icons and textured backgrounds */
+
+/* Animated plane icons for From and To fields */
+@keyframes fly {
+  0% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(10px) translateY(-5px) rotate(10deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.flight-search-form label[for="fromInput"] {
+  position: relative;
+}
+
+.flight-search-form label[for="fromInput"]::after {
+  content: "✈️";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  animation: fly 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.flight-search-form label[for="toInput"] {
+  position: relative;
+}
+
+.flight-search-form label[for="toInput"]::after {
+  content: "🛬";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  animation: fly 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Textured background for flight search form */
+.flight-search-form {
+  background-image: url('../images/map-texture.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: #f0e68c;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+}
+
+/* Interactive Map Styles */
+.interactive-map-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.interactive-map-container h3 {
+    text-align: center;
+    color: #1d3557;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    font-size: 1.8rem;
+}
+
+.interactive-map {
+    position: relative;
+    max-width: 100%;
+    height: 400px;
+    margin: 0 auto;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.interactive-map img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 15px;
+}
+
+.map-hotspot {
+    position: absolute;
+    background-color: #e63946;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    color: white;
+    font-weight: 700;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    user-select: none;
+}
+
+.map-hotspot:hover,
+.map-hotspot:focus {
+    background-color: #b22234;
+    outline: none;
+}
+
+/* AI Suggested Picks Styles */
+.ai-suggested-picks {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.ai-suggested-picks h3 {
+    text-align: center;
+    color: #1d3557;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    font-size: 1.8rem;
+}
+
+.ai-suggested-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+/* Live Social Snippets Styles */
+.live-social-snippets {
+    max-width: 1200px;
+    margin: 2rem auto 4rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.live-social-snippets h3 {
+    text-align: center;
+    color: #1d3557;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    font-size: 1.8rem;
+}
+
+.social-snippets-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    min-height: 150px;
+    color: #555;
+    font-style: italic;
+    font-size: 1rem;
+    text-align: center;
+    padding: 1rem;
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+}
+
+/* Header and Navigation */
+header {
+    background-color: #0a1e3f;
+    color: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* Subscribe to Newsletter Section */
+.subscribe-newsletter.enhanced-subscribe {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background: linear-gradient(135deg, #4680d8, #e2dee6);
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(125, 8, 204, 0.5);
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #1d3557;
+    position: relative;
+}
+
+.subscribe-newsletter.enhanced-subscribe h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.newsletter-subheading {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+}
+
+.subscribe-form {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.subscribe-form input[type="email"] {
+    flex: 1 1 70%;
+    padding: 0.75rem 1rem;
+    border-radius: 30px;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    outline: none;
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.subscribe-form input[type="email"]:focus {
+    box-shadow: 0 0 10px #fca311;
+    background-color: #f0f8ff;
+}
+
+.subscribe-btn {
+    flex: 1 1 25%;
+    background: linear-gradient(90deg, #d4d1d6, #9489d3);
+    border: none;
+    border-radius: 30px;
+    color: #1d3557;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(252, 163, 17, 0.7);
+}
+
+.subscribe-btn:hover {
+    background: linear-gradient(90deg, #f5d76e, #fca311);
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(252, 163, 17, 0.9);
+}
+
+.subscribe-message {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #1d3557;
+    min-height: 1.5em;
+}
+
+/* Responsive: stack input and button vertically on small screens */
+@media (max-width: 480px) {
+    .subscribe-form {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .subscribe-form input[type="email"],
+    .subscribe-btn {
+        flex: 1 1 100%;
+    }
+}
+
+/* Why Choose Us Section */
+.side-by-side-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 0 1rem;
+}
+
+.side-by-side-container > section {
+    flex: 1 1 45%;
+}
+
+/* Adjust Why Choose Us section for side-by-side */
+.why-choose-us {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.why-choose-us h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1d3557;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* Timeline container - adjust for horizontal layout */
+.features.timeline {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    padding-left: 0;
+    border-left: none;
+}
+
+/* Timeline line removed for horizontal layout */
+.features.timeline::before {
+    content: none;
+}
+
+/* Card style for each feature */
+.feature.card {
+    background: #f0f0f0;
+    border-radius: 15px;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 4px 15px rgba(246, 153, 0, 0.3);
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Icon container as timeline node */
+.feature.card .icon-container {
+    position: absolute;
+    left: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #fca311;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px #fca311;
+    transition: box-shadow 0.3s ease;
+}
+
+/* Feature title */
+.feature.card h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    color: #1d3557;
+}
+
+/* Feature description */
+.feature.card p {
+    margin: 0;
+    color: #333;
+    font-size: 1rem;
+}
+
+/* Hover effects */
+.feature.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(246, 153, 0, 0.6);
+}
+
+.feature.card:hover .icon-container {
+    box-shadow: 0 0 20px #fca311;
+}
+
+/* Fade-in animation */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.feature.card {
+    opacity: 0;
+    animation: fadeInUp 0.8s forwards;
+}
+
+.feature.card:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.feature.card:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.feature.card:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.top-nav {
+    background-color: #0a1e3f;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+.top-nav .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: normal;
+    color: white;
+}
+
+nav ul.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.nav-links li a.active,
+.nav-links li a:hover {
+    text-decoration: underline;
+    color: #fca311;
+}
+
+.sign-up-btn {
+    background-color: #f94144;
+    border: none;
+    color: white;
+    padding: 0.5rem 1.2rem;
+    border-radius: 25px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.sign-up-btn:hover {
+    background-color: #d73035;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(rgba(10, 30, 63, 0.7), rgba(10, 30, 63, 0.7)), url('../images/index-BG.jpg') center center/cover no-repeat;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-shadow: 0 0 10px rgba(0,0,0,0.7);
+    text-align: center;
+    padding: 0 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, rgba(10, 30, 63, 0.7) 0%, rgba(10, 30, 63, 0.7) 100%);
+    z-index: 1;
+}
+
+.hero-section h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-section h1 .highlight {
+    color: #fca311;
+}
+
+.tagline {
+    font-size: 1.5rem;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 2;
+    color: #f0a500;
+}
+
+.explore-btn {
+    background-color: #fca311;
+    border: none;
+    color: white;
+    padding: 0.75rem 2.5rem;
+    font-size: 1.2rem;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    position: relative;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.explore-btn:hover {
+    background-color: #d18e00;
+    transform: scale(1.05);
+}
+
+.explore-btn .arrow {
+    display: inline-block;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-8px);
+    }
+    60% {
+        transform: translateY(-4px);
+    }
+}
+
+/* Parallax effect */
+.hero-section.parallax {
+    background-attachment: fixed;
+}
+
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 2.2rem;
+    }
+
+    .tagline {
+        font-size: 1.2rem;
+    }
+}
+
+.hero-section h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+/* Flight Search Form */
+.flight-search {
+    max-width: 900px;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.flight-inputs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    width: 100%;
+}
+
+.flight-inputs label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    color: #0a1e3f;
+    min-width: 150px;
+}
+
+.flight-inputs input,
+.flight-inputs select {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-top: 0.3rem;
+    transition: border-color 0.3s ease;
+}
+
+.flight-inputs input:focus,
+.flight-inputs select:focus {
+    border-color: #fca311;
+    outline: none;
+}
+
+/* Disabled return date input style */
+.flight-inputs input[disabled] {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+
+/* Subtle checkbox styling */
+.subtle-checkbox {
+    font-weight: 600;
+    color: #0a1e3f;
+    margin-top: 1rem;
+}
+
+.subtle-checkbox input[type="checkbox"] {
+    margin-right: 0.5rem;
+    cursor: pointer;
+}
+
+/* Prominent search button */
+.prominent-btn {
+    background-color: #d90429;
+    color: white;
+    font-weight: 900;
+    font-size: 1.3rem;
+    padding: 0.85rem 2.5rem;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: background-color 0.3s ease;
+    margin-top: 1rem;
+}
+
+.prominent-btn:hover {
+    background-color: #9b0219;
+}
+
+/* Trending Destinations */
+.trending-destinations {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #222;
+}
+
+.trending-destinations h2 {
+    text-align: center;
+    color: #e63946;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    font-size: 2.5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.trending-destinations .subtitle {
+    color: #555;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-style: italic;
+}
+
+.destinations-columns {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.destinations-column {
+    flex: 1 1 45%;
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    padding: 1.5rem;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.destinations-column h3 {
+    text-align: center;
+    color: #1d3557;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    font-size: 1.8rem;
+}
+
+.slider-wrapper {
+    position: relative;
+}
+
+.slider-container {
+    display: flex;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    gap: 1rem;
+    padding-bottom: 1rem;
+}
+
+.destinations-list {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.destination-card {
+    min-width: 300px;
+    margin: 0 10px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 1rem;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.destination-card img {
+    width: 100%;
+    border-radius: 8px;
+    height: 180px;
+    object-fit: cover;
+}
+
+.destination-card h3 {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.destination-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem 0;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.destination-card ul li {
+    margin-bottom: 0.3rem;
+}
+
+.view-btn {
+    background-color: #0077b6;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.view-btn:hover {
+    background-color: #023e8a;
+}

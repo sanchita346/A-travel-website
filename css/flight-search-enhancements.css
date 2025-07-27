@@ -1,0 +1,301 @@
+.flight-search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 3rem 0;
+}
+
+.flight-search-form {
+    width: 100%;
+    max-width: 700px;
+    background: linear-gradient(135deg, #4db6ac, #81d4fa);
+    border-radius: 20px;
+    padding: 2rem 3rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    color: #004d40;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background 0.3s ease;
+    position: relative;
+}
+
+.flight-search-form:hover {
+    background: linear-gradient(135deg, #26a69a, #4fc3f7);
+}
+
+.flight-search-form h2 {
+    text-align: center;
+    font-family: 'Segoe UI Black', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 900;
+    font-size: 2.5rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+    color: #004d40;
+    text-shadow: 1px 1px 2px #a7ffeb;
+}
+
+/* Trip type selector */
+.trip-type {
+    flex-basis: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    background: #b2dfdb;
+    border-radius: 25px;
+    padding: 0.5rem;
+    position: relative;
+}
+
+.trip-type label {
+    cursor: pointer;
+    font-weight: 700;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #004d40;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    position: relative;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.trip-type input[type="radio"] {
+    display: none;
+}
+
+.trip-type label::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 0;
+    background-color: #00796b;
+    border-radius: 3px 3px 0 0;
+    transition: width 0.3s ease;
+}
+
+.trip-type input[type="radio"]:checked + label {
+    background-color: #00796b;
+    color: white;
+}
+
+.trip-type input[type="radio"]:checked + label::before {
+    width: 100%;
+}
+
+/* Icons for input fields */
+.input-label {
+    flex: 1 1 45%;
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    color: #004d40;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.input-label input,
+.input-label select {
+    background: #e0f2f1;
+    border: 1px solid #004d40;
+    border-radius: 10px;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #004d40;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.input-label input:focus,
+.input-label select:focus {
+    box-shadow: 0 0 10px #26a69a;
+    border-color: #26a69a;
+    outline: none;
+}
+
+/* Icon inside input fields */
+.input-label input[type="text"]::before,
+.input-label input[type="date"]::before,
+.input-label select::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    pointer-events: none;
+}
+
+/* Specific icons for each input */
+.input-label[for="fromInput"] input::before {
+    background-image: url('../images/plane-takeoff.svg');
+}
+
+.input-label[for="toInput"] input::before {
+    background-image: url('../images/plane-landing.svg');
+}
+
+.input-label[for="departureInput"] input::before,
+.input-label[for="returnInput"] input::before {
+    background-image: url('../images/calendar.svg');
+}
+
+.input-label[for="travellersClassSelect"] select::before {
+    background-image: url('../images/user.svg');
+}
+
+/* Tooltip for info icon */
+.info-tooltip {
+    font-size: 1.2rem;
+    margin-left: 0.5rem;
+    cursor: help;
+    color: #00796b;
+    user-select: none;
+}
+
+/* Checkbox styling */
+.subtle-checkbox {
+    flex-basis: 100%;
+    color: #004d40;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.subtle-checkbox input[type="checkbox"] {
+    margin-right: 0.5rem;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+    transition: box-shadow 0.3s ease;
+}
+
+.subtle-checkbox input[type="checkbox"]:focus {
+    box-shadow: 0 0 5px #26a69a;
+    outline: none;
+}
+
+/* Search button */
+.search-btn.prominent-btn {
+    background: linear-gradient(90deg, #ff9800, #ffb74d);
+    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.7);
+    font-weight: 900;
+    font-family: 'Segoe UI Black', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.2rem;
+    border-radius: 25px;
+    padding: 0.85rem 2.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-btn.prominent-btn:hover {
+    background: linear-gradient(90deg, #ffb74d, #ff9800);
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 152, 0, 0.9);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .input-label {
+        flex: 1 1 100%;
+    }
+    .trip-type {
+        flex-wrap: wrap;
+    }
+}
+
+.input-label {
+    flex: 1 1 45%;
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    color: #004d40;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.input-label input,
+.input-label select {
+    background: #e0f2f1;
+    border: 1px solid #004d40;
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #004d40;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.input-label input:focus,
+.input-label select:focus {
+    box-shadow: 0 0 10px #26a69a;
+    border-color: #26a69a;
+    outline: none;
+}
+
+.info-tooltip {
+    font-size: 1.2rem;
+    margin-left: 0.5rem;
+    cursor: help;
+    color: #00796b;
+    user-select: none;
+}
+
+.subtle-checkbox {
+    flex-basis: 100%;
+    color: #004d40;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.subtle-checkbox input[type="checkbox"] {
+    margin-right: 0.5rem;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+    transition: box-shadow 0.3s ease;
+}
+
+.subtle-checkbox input[type="checkbox"]:focus {
+    box-shadow: 0 0 5px #26a69a;
+    outline: none;
+}
+
+.search-btn.prominent-btn {
+    background: linear-gradient(90deg, #ff9800, #ffb74d);
+    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.7);
+    font-weight: 900;
+    font-family: 'Segoe UI Black', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.2rem;
+    border-radius: 25px;
+    padding: 0.85rem 2.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-btn.prominent-btn:hover {
+    background: linear-gradient(90deg, #ffb74d, #ff9800);
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 152, 0, 0.9);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .input-label {
+        flex: 1 1 100%;
+    }
+    .trip-type {
+        flex-wrap: wrap;
+    }
+}

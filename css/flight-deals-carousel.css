@@ -1,0 +1,122 @@
+.flight-deals-carousel {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 2rem 1rem;
+    text-align: center;
+    background: linear-gradient(135deg, #4db6ac, #81d4fa);
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    position: relative;
+    color: #004d40;
+}
+
+.flight-deals-carousel h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: #004d40;
+}
+
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-track-container {
+    overflow: hidden;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.carousel-slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.carousel-slide.current-slide {
+    opacity: 1;
+}
+
+.carousel-slide img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+}
+
+.carousel-slide h3 {
+    margin: 0;
+    color: #1d3557;
+}
+
+.carousel-slide p {
+    font-size: 1.1rem;
+    color: #555;
+    margin: 0;
+}
+
+.deal-cta-btn {
+    background-color: #00796b;
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 30px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 121, 107, 0.7);
+}
+
+.deal-cta-btn:hover {
+    background-color: #004d40;
+    box-shadow: 0 6px 20px rgba(0, 77, 64, 0.9);
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #4db6ac;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    padding: 0 0.5rem;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+}
+
+.carousel-btn:hover {
+    background-color: #3a8c85;
+}
+
+.prev-btn {
+    left: 10px;
+}
+
+.next-btn {
+    right: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .carousel-slide {
+        min-width: 100%;
+    }
+}
