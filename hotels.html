@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hotels - The Heritage Luxe</title>
+    <link rel="stylesheet" href="css/hotels.css" />
+</head>
+<body>
+    <header>
+        <div class="top-nav sticky">
+            <div class="logo">
+                <img src="images/logo-new.png" alt="The Heritage Luxe Logo" style="height: 40px; width: auto; margin-right: 10px;" />
+                The Heritage Luxe
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="flights.html">Flights</a></li>
+                    <li><a href="destinations.html">Destinations</a></li>
+                    <li><a href="hotels.html" class="active">Hotels</a></li>
+                    <li><a href="about-us.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="auth.html">Login</a></li>
+                </ul>
+            </nav>
+            <button class="sign-up-btn" onclick="window.location.href='auth.html'">Sign Up</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section with Parallax Effect -->
+        <section class="hero-parallax">
+            <div class="hero-content">
+                <h1>Experience Modern Luxury</h1>
+                <p>Discover the finest hotels with exclusive amenities and breathtaking views.</p>
+            </div>
+        </section>
+
+        <!-- Room Type Showcase -->
+        <section class="room-showcase">
+            <h2>Room Types</h2>
+            <div class="room-cards">
+                <div class="room-card">
+                    <img src="images/deluxe-room.jpg" alt="Deluxe Room" />
+                    <h3>Deluxe Room</h3>
+                    <p>Spacious room with king-size bed and city view.</p>
+                </div>
+                <div class="room-card">
+                    <img src="images/executive-suite.jpg" alt="Executive Suite" />
+                    <h3>Executive Suite</h3>
+                    <p>Luxury suite with private balcony and lounge area.</p>
+                </div>
+                <div class="room-card">
+                    <img src="images/presidential-suite.jpg" alt="Presidential Suite" />
+                    <h3>Presidential Suite</h3>
+                    <p>Exclusive suite with private pool and panoramic views.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3D Virtual Tour Button -->
+        <section class="virtual-tour">
+            <button id="virtualTourBtn" class="btn btn-primary">Take a 3D Virtual Tour</button>
+        </section>
+
+        <!-- Local Attractions Map -->
+        <section class="local-attractions">
+            <h2>Local Attractions</h2>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.019927927927!2d-122.419415484681!3d37.7749297797596!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085809c5b1a1a1b%3A0x4a1a1a1a1a1a1a1a!2sSan+Francisco%2C+CA!5e0!3m2!1sen!2sus!4v1610000000000!5m2!1sen!2sus"
+                width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </section>
+
+        <!-- Review Carousel -->
+        <section class="review-carousel">
+            <h2>Guest Reviews</h2>
+            <div class="carousel-container">
+                <button class="carousel-btn prev-btn">&#10094;</button>
+                <div class="carousel-track-container">
+                    <ul class="carousel-track">
+                        <li class="carousel-slide current-slide">
+                            <p>"Amazing service and beautiful rooms!"</p>
+                            <h4>- Jane Doe</h4>
+                        </li>
+                        <li class="carousel-slide">
+                            <p>"Best hotel experience I've ever had."</p>
+                            <h4>- John Smith</h4>
+                        </li>
+                        <li class="carousel-slide">
+                            <p>"Highly recommend for luxury and comfort."</p>
+                            <h4>- Emily Johnson</h4>
+                        </li>
+                    </ul>
+                </div>
+                <button class="carousel-btn next-btn">&#10095;</button>
+            </div>
+        </section>
+
+        <!-- Booking Widget -->
+        <section class="booking-widget">
+            <h2>Book Your Stay</h2>
+            <form id="bookingForm">
+                <label for="destination">Destination
+                    <input type="text" id="destination" name="destination" placeholder="Enter destination" required />
+                </label>
+                <label for="checkin">Check-in
+                    <input type="date" id="checkin" name="checkin" required />
+                </label>
+                <label for="checkout">Check-out
+                    <input type="date" id="checkout" name="checkout" required />
+                </label>
+                <label for="guests">Guests
+                    <select id="guests" name="guests" required>
+                        <option value="" disabled selected>Guests</option>
+                        <option value="1">1 Guest</option>
+                        <option value="2">2 Guests</option>
+                        <option value="3">3 Guests</option>
+                        <option value="4">4 Guests</option>
+                    </select>
+                </label>
+                <button type="submit" class="btn btn-primary">Book Now</button>
+            </form>
+        </section>
+    </main>
+
+<!-- Footer -->
+    <footer style="background-color: #343a40; color: white; padding: 1rem; text-align: center; margin-top: 2rem;">
+        <p>&copy; 2024 The Heritage Luxe. All rights reserved.</p>
+    </footer>
+
+    <script src="js/hotels.js"></script>
+</body>
+</html>

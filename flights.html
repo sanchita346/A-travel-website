@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Flights - The Heritage Luxe</title>
+        <link rel="stylesheet" href="css/styles.css" />
+        <link rel="stylesheet" href="css/flight-details.css" />
+        <link rel="stylesheet" href="css/flight-search-skyline-serenity.css" />
+        <link rel="stylesheet" href="css/flight-details-modal.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    </head>
+    <body>
+        <!-- Header/Navbar -->
+    <header>
+        <div class="top-nav sticky">
+            <div class="logo">
+                <img src="images/logo-new.png" alt="The Heritage Luxe Logo" style="height: 40px; width: auto; margin-right: 10px;" />
+                The Heritage Luxe
+            </div>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="flights.html" class="active">Flights</a></li>
+                        <li><a href="hotels.html">Hotels</a></li>
+                        <li><a href="destinations.html">Destinations</a></li>
+                        <li><a href="about-us.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="auth.html">Login</a></li>
+                    </ul>
+                </nav>
+                <button class="sign-up-btn" onclick="window.location.href='auth.html'">Sign Up</button>
+                <button id="darkModeToggle" aria-label="Toggle Dark Mode" title="Toggle Dark Mode" style="margin-left: 1rem; padding: 0.4rem 0.8rem; border-radius: 5px; border: none; cursor: pointer;">🌙</button>
+            </div>
+        </header>
+
+    <main>
+        <!-- Flight Search Form -->
+        <section class="flight-search-form">
+            <h2>Search Flights</h2>
+            <form id="searchForm" class="search-form">
+                <div class="form-group">
+                    <label for="tripType">Trip Type:</label>
+                    <div id="tripType" class="trip-type-selector">
+                        <label><input type="radio" name="tripType" value="oneway" checked> One-way</label>
+                        <label><input type="radio" name="tripType" value="roundtrip"> Round-trip</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="from"><i class="fa-solid fa-plane-departure"></i> From:</label>
+                    <input type="text" id="from" name="from" placeholder="City or Airport" required />
+                </div>
+                <div class="form-group">
+                    <label for="to"><i class="fa-solid fa-plane-arrival"></i> To:</label>
+                    <input type="text" id="to" name="to" placeholder="City or Airport" required />
+                </div>
+                <div class="form-group">
+                    <label for="departureDate"><i class="fa-solid fa-calendar-days"></i> Departure Date:</label>
+                    <input type="date" id="departureDate" name="departureDate" required />
+                </div>
+                <div class="form-group" id="returnDateGroup" style="display:none;">
+                    <label for="returnDate"><i class="fa-solid fa-arrow-rotate-left"></i> Return Date:</label>
+                    <input type="date" id="returnDate" name="returnDate" />
+                </div>
+                <div class="form-group">
+                    <label for="passengers"><i class="fa-solid fa-user"></i> Passengers:</label>
+                    <div id="passengerSelector" class="passenger-selector">
+                        <button type="button" class="passenger-decrement" aria-label="Decrease passengers">-</button>
+                        <input type="number" id="passengers" name="passengers" value="1" min="1" max="9" readonly />
+                        <button type="button" class="passenger-increment" aria-label="Increase passengers">+</button>
+                    </div>
+                </div>
+                <div class="form-group submit-group">
+                    <button type="submit">Search Flights</button>
+                </div>
+            </form>
+        </section>
+
+        <div style="display: flex; gap: 1rem; padding: 1rem;">
+            <!-- Filters Sidebar -->
+            <aside class="filters-sidebar">
+                <h3>Filters</h3>
+                <form id="filtersForm">
+                    <div>
+                        <label><input type="checkbox" name="nonStop" /> Non-stop flights</label>
+                    </div>
+                    <div>
+                        <label><input type="checkbox" name="oneStop" /> 1 Stop</label>
+                    </div>
+                    <div>
+                        <label><input type="checkbox" name="twoPlusStops" /> 2+ Stops</label>
+                    </div>
+                    <div>
+                        <label for="priceRange">Max Price:</label><br/>
+                        <input type="range" id="priceRange" name="priceRange" min="0" max="1000" step="10" value="1000" />
+                        <span id="priceValue">$1000</span>
+                    </div>
+                </form>
+            </aside>
+
+            <!-- Flight Results -->
+            <section class="flight-results" style="flex: 3;">
+                <h2>Flight Results</h2>
+                <div id="resultsContainer">
+                    <!-- Flight result cards will be dynamically inserted here -->
+                    <div class="deal-card">
+                        <img src="images/airline-logo1.png" alt="Airline Logo" class="airline-logo" />
+                        <div class="flight-info">
+                            <h3>New York &rarr; London</h3>
+                            <p><i class="fa-solid fa-clock"></i> Duration: 7h 30m</p>
+                            <p><i class="fa-solid fa-plane"></i> Stops: Non-stop</p>
+                            <p class="price green">Price: $450</p>
+                            <button class="book-btn">Book Now</button>
+                            <button class="details-btn">Details</button>
+                        </div>
+                        <div class="details-panel" style="display:inside;">
+                            <h4>🛫 Essential Flight Details</h4>
+                            <p><strong>Airline:</strong> Emirates <img src="images/airline-logo1.png" alt="Emirates Logo" style="height: 70px; vertical-align: middle; margin-left: 5px;" /></p>
+                            <p><strong>Flight Number:</strong> EK203</p>
+                            <p><strong>Route:</strong> JFK - John F. Kennedy Intl &rarr; LHR - London Heathrow</p>
+                            <p><strong>Layovers:</strong> None</p>
+                            <h4>📦 Additional Travel Info</h4>
+                            <p><strong>Cabin Baggage Allowance:</strong> 7kg</p>
+                            <p><strong>Checked Baggage Allowance:</strong> 20kg</p>
+                            <p><strong>Extra Baggage Options:</strong> Available for purchase</p>
+                            <h4>🛫 Class & Seat Type</h4>
+                            <p><strong>Class:</strong> Economy</p>
+                            <p><strong>Seat Type:</strong> Standard</p>
+                            <h4>📋 Fare Rules</h4>
+                            <p><strong>Refundable:</strong> No</p>
+                            <p><strong>Free Date Changes:</strong> No</p>
+                            <p><strong>Cancellation Fees:</strong> $100</p>
+                            <p><strong>Rebooking Policy:</strong> Allowed with fee</p>
+                            <h4>✈️ Flight Features / Amenities</h4>
+                            <p><strong>Meals Included:</strong> Yes</p>
+                            <p><strong>In-flight Entertainment:</strong> Movies, Music</p>
+                            <p><strong>Wi-Fi Availability:</strong> Yes</p>
+                            <p><strong>Charging Ports:</strong> USB power available</p>
+                            <h4>🧾 Pricing & Fees</h4>
+                            <p><strong>Base Fare:</strong> $400</p>
+                            <p><strong>Taxes & Surcharges:</strong> $30</p>
+                            <p><strong>Service Fee:</strong> $20</p>
+                            <p><strong>Final Price per Passenger:</strong> $450</p>
+                            <h4>📋 Optional Add-ons & Extras</h4>
+                            <p><strong>Seat Selection:</strong> Available</p>
+                            <p><strong>Meal Preference:</strong> Available</p>
+                            <p><strong>Travel Insurance:</strong> Available</p>
+                            <p><strong>Priority Check-in / Boarding:</strong> Available</p>
+                            <p><strong>Lounge Access:</strong> Available</p>
+                            <h4>📍 Real-Time Info</h4>
+                            <p><strong>Gate Number:</strong> 12</p>
+                            <p><strong>Terminal Number:</strong> 4</p>
+                            <p><strong>Status:</strong> On-time</p>
+                            <p><strong>Boarding Time:</strong> 14:30 EST</p>
+                            <h4>🎯 User-Focused Extras</h4>
+                            <p><strong>Airline Rating:</strong> 4.5/5 (3000 reviews)</p>
+                            <p><strong>Punctuality Score:</strong> 90%</p>
+                            <p><strong>Comfort Rating:</strong> 4/5</p>
+                            <h4>✅ Environmental Data</h4>
+                            <p><strong>Carbon Emissions:</strong> Lower emissions flight</p>
+                            <p><strong>Sustainability Badges:</strong> Certified Green Airline</p>
+                        </div>
+                    </div>
+                    <div class="deal-card">
+                        <img src="images/airline-logo2.png" alt="Airline Logo" class="airline-logo" />
+                        <div class="flight-info">
+                            <h3>Delhi &rarr; Mumbai</h3>
+                            <p><i class="fa-solid fa-clock"></i> Duration: 2h 15m</p>
+                            <p><i class="fa-solid fa-plane"></i> Stops: Non-stop</p>
+                            <p class="price green">Price: ₹3500</p>
+                            <button class="book-btn">Book Now</button>
+                            <button class="details-btn">Details</button>
+                        </div>
+                        <div class="details-panel" style="display:none;">
+                            <h4>🛫 Essential Flight Details</h4>
+                            <p><strong>Airline:</strong> Indigo <img src="images/airline-logo2.png" alt="Indigo Logo" style="height: 70px; vertical-align: middle; margin-left: 5px;" /></p>
+                            <p><strong>Flight Number:</strong> 6E123</p>
+                            <p><strong>Route:</strong> DEL - Indira Gandhi Intl &rarr; BOM - Chhatrapati Shivaji Intl</p>
+                            <p><strong>Layovers:</strong> None</p>
+                            <h4>📦 Additional Travel Info</h4>
+                            <p><strong>Cabin Baggage Allowance:</strong> 7kg</p>
+                            <p><strong>Checked Baggage Allowance:</strong> 15kg</p>
+                            <p><strong>Extra Baggage Options:</strong> Available for purchase</p>
+                            <h4>🛫 Class & Seat Type</h4>
+                            <p><strong>Class:</strong> Economy</p>
+                            <p><strong>Seat Type:</strong> Standard</p>
+                            <h4>📋 Fare Rules</h4>
+                            <p><strong>Refundable:</strong> No</p>
+                            <p><strong>Free Date Changes:</strong> No</p>
+                            <p><strong>Cancellation Fees:</strong> ₹1000</p>
+                            <p><strong>Rebooking Policy:</strong> Allowed with fee</p>
+                            <h4>✈️ Flight Features / Amenities</h4>
+                            <p><strong>Meals Included:</strong> No</p>
+                            <p><strong>In-flight Entertainment:</strong> None</p>
+                            <p><strong>Wi-Fi Availability:</strong> No</p>
+                            <p><strong>Charging Ports:</strong> USB power available</p>
+                            <h4>🧾 Pricing & Fees</h4>
+                            <p><strong>Base Fare:</strong> ₹3000</p>
+                            <p><strong>Taxes & Surcharges:</strong> ₹300</p>
+                            <p><strong>Service Fee:</strong> ₹200</p>
+                            <p><strong>Final Price per Passenger:</strong> ₹3500</p>
+                            <h4>📋 Optional Add-ons & Extras</h4>
+                            <p><strong>Seat Selection:</strong> Available</p>
+                            <p><strong>Meal Preference:</strong> Available</p>
+                            <p><strong>Travel Insurance:</strong> Available</p>
+                            <p><strong>Priority Check-in / Boarding:</strong> Available</p>
+                            <p><strong>Lounge Access:</strong> Not Available</p>
+                            <h4>📍 Real-Time Info</h4>
+                            <p><strong>Gate Number:</strong> 5</p>
+                            <p><strong>Terminal Number:</strong> 3</p>
+                            <p><strong>Status:</strong> On-time</p>
+                            <p><strong>Boarding Time:</strong> 10:30 IST</p>
+                            <h4>🎯 User-Focused Extras</h4>
+                            <p><strong>Airline Rating:</strong> 4.2/5 (1500 reviews)</p>
+                            <p><strong>Punctuality Score:</strong> 88%</p>
+                            <p><strong>Comfort Rating:</strong> 3.8/5</p>
+                            <h4>✅ Environmental Data</h4>
+                            <p><strong>Carbon Emissions:</strong> Standard emissions</p>
+                            <p><strong>Sustainability Badges:</strong> None</p>
+                        </div>
+                    </div>
+                    <div class="deal-card">
+                        <img src="images/airline-logo3.png" alt="Airline Logo" class="airline-logo" />
+                        <div class="flight-info">
+                            <h3>Bangalore &rarr; Chennai</h3>
+                            <p><i class="fa-solid fa-clock"></i> Duration: 1h 20m</p>
+                            <p><i class="fa-solid fa-plane"></i> Stops: Non-stop</p>
+                            <p class="price red">Price: ₹2500</p>
+                            <button class="book-btn">Book Now</button>
+                            <button class="details-btn">Details</button>
+                        </div>
+                        <div class="details-panel" style="display:none;">
+                            <h4>🛫 Essential Flight Details</h4>
+                            <p><strong>Airline:</strong> Air India <img src="images/airline-logo3.png" alt="Air India Logo" style="height: 70px; vertical-align: middle; margin-left: 5px;" /></p>
+                            <p><strong>Flight Number:</strong> AI456</p>
+                            <p><strong>Route:</strong> BLR - Kempegowda Intl &rarr; MAA - Chennai Intl</p>
+                            <p><strong>Layovers:</strong> None</p>
+                            <h4>📦 Additional Travel Info</h4>
+                            <p><strong>Cabin Baggage Allowance:</strong> 8kg</p>
+                            <p><strong>Checked Baggage Allowance:</strong> 25kg</p>
+                            <p><strong>Extra Baggage Options:</strong> Available for purchase</p>
+                            <h4>🛫 Class & Seat Type</h4>
+                            <p><strong>Class:</strong> Business</p>
+                            <p><strong>Seat Type:</strong> Extra legroom</p>
+                            <h4>📋 Fare Rules</h4>
+                            <p><strong>Refundable:</strong> Yes</p>
+                            <p><strong>Free Date Changes:</strong> Yes</p>
+                            <p><strong>Cancellation Fees:</strong> ₹2000</p>
+                            <p><strong>Rebooking Policy:</strong> Allowed without fee</p>
+                            <h4>✈️ Flight Features / Amenities</h4>
+                            <p><strong>Meals Included:</strong> Yes</p>
+                            <p><strong>In-flight Entertainment:</strong> Movies, Music, Wi-Fi</p>
+                            <p><strong>Wi-Fi Availability:</strong> Yes</p>
+                            <p><strong>Charging Ports:</strong> USB and power outlets</p>
+                            <h4>🧾 Pricing & Fees</h4>
+                            <p><strong>Base Fare:</strong> ₹2200</p>
+                            <p><strong>Taxes & Surcharges:</strong> ₹200</p>
+                            <p><strong>Service Fee:</strong> ₹100</p>
+                            <p><strong>Final Price per Passenger:</strong> ₹2500</p>
+                            <h4>📋 Optional Add-ons & Extras</h4>
+                            <p><strong>Seat Selection:</strong> Available</p>
+                            <p><strong>Meal Preference:</strong> Available</p>
+                            <p><strong>Travel Insurance:</strong> Available</p>
+                            <p><strong>Priority Check-in / Boarding:</strong> Available</p>
+                            <p><strong>Lounge Access:</strong> Available</p>
+                            <h4>📍 Real-Time Info</h4>
+                            <p><strong>Gate Number:</strong> 8</p>
+                            <p><strong>Terminal Number:</strong> 1</p>
+                            <p><strong>Status:</strong> On-time</p>
+                            <p><strong>Boarding Time:</strong> 16:00 IST</p>
+                            <h4>🎯 User-Focused Extras</h4>
+                            <p><strong>Airline Rating:</strong> 4.0/5 (1200 reviews)</p>
+                            <p><strong>Punctuality Score:</strong> 85%</p>
+                            <p><strong>Comfort Rating:</strong> 4.2/5</p>
+                            <h4>✅ Environmental Data</h4>
+                            <p><strong>Carbon Emissions:</strong> Standard emissions</p>
+                            <p><strong>Sustainability Badges:</strong> None</p>
+                        </div>
+                    </div>
+                    <div class="deal-card">
+                        <img src="images/airline-logo4.png" alt="Airline Logo" class="airline-logo" />
+                        <div class="flight-info">
+                            <h3>San Francisco &rarr; Tokyo</h3>
+                            <p><i class="fa-solid fa-clock"></i> Duration: 11h 45m</p>
+                            <p><i class="fa-solid fa-plane"></i> Stops: 1 Stop</p>
+                            <p class="price green">Price: $700</p>
+                            <button class="book-btn">Book Now</button>
+                            <button class="details-btn">Details</button>
+                        </div>
+                        <div class="details-panel" style="display:none;">
+                            <h4>🛫 Essential Flight Details</h4>
+                            <p><strong>Airline:</strong> United Airlines <img src="images/airline-logo4.png" alt="United Airlines Logo" style="height: 70px; vertical-align: middle; margin-left: 5px;" /></p>
+                            <p><strong>Flight Number:</strong> UA789</p>
+                            <p><strong>Route:</strong> SFO - San Francisco Intl &rarr; NRT - Narita Intl</p>
+                            <p><strong>Layovers:</strong> 1 Stop at LAX (1h 30m)</p>
+                            <h4>📦 Additional Travel Info</h4>
+                            <p><strong>Cabin Baggage Allowance:</strong> 8kg</p>
+                            <p><strong>Checked Baggage Allowance:</strong> 23kg</p>
+                            <p><strong>Extra Baggage Options:</strong> Available for purchase</p>
+                            <h4>🛫 Class & Seat Type</h4>
+                            <p><strong>Class:</strong> Economy</p>
+                            <p><strong>Seat Type:</strong> Standard</p>
+                            <h4>📋 Fare Rules</h4>
+                            <p><strong>Refundable:</strong> No</p>
+                            <p><strong>Free Date Changes:</strong> No</p>
+                            <p><strong>Cancellation Fees:</strong> $150</p>
+                            <p><strong>Rebooking Policy:</strong> Allowed with fee</p>
+                            <h4>✈️ Flight Features / Amenities</h4>
+                            <p><strong>Meals Included:</strong> Yes</p>
+                            <p><strong>In-flight Entertainment:</strong> Movies, Music</p>
+                            <p><strong>Wi-Fi Availability:</strong> Yes</p>
+                            <p><strong>Charging Ports:</strong> USB power available</p>
+                            <h4>🧾 Pricing & Fees</h4>
+                            <p><strong>Base Fare:</strong> $600</p>
+                            <p><strong>Taxes & Surcharges:</strong> $50</p>
+                            <p><strong>Service Fee:</strong> $50</p>
+                            <p><strong>Final Price per Passenger:</strong> $700</p>
+                            <h4>📋 Optional Add-ons & Extras</h4>
+                            <p><strong>Seat Selection:</strong> Available</p>
+                            <p><strong>Meal Preference:</strong> Available</p>
+                            <p><strong>Travel Insurance:</strong> Available</p>
+                            <p><strong>Priority Check-in / Boarding:</strong> Available</p>
+                            <p><strong>Lounge Access:</strong> Available</p>
+                            <h4>📍 Real-Time Info</h4>
+                            <p><strong>Gate Number:</strong> 22</p>
+                            <p><strong>Terminal Number:</strong> 2</p>
+                            <p><strong>Status:</strong> Delayed</p>
+                            <p><strong>Boarding Time:</strong> 18:45 PST</p>
+                            <h4>🎯 User-Focused Extras</h4>
+                            <p><strong>Airline Rating:</strong> 4.3/5 (2000 reviews)</p>
+                            <p><strong>Punctuality Score:</strong> 87%</p>
+                            <p><strong>Comfort Rating:</strong> 4.1/5</p>
+                            <h4>✅ Environmental Data</h4>
+                            <p><strong>Carbon Emissions:</strong> Lower emissions flight</p>
+                            <p><strong>Sustainability Badges:</strong> Certified Green Airline</p>
+                        </div>
+                    </div>
+                    <div class="deal-card">
+                        <img src="images/airline-logo5.png" alt="Airline Logo" class="airline-logo" />
+                        <div class="flight-info">
+                            <h3>Paris &rarr; Rome</h3>
+                            <p><i class="fa-solid fa-clock"></i> Duration: 2h 10m</p>
+                            <p><i class="fa-solid fa-plane"></i> Stops: Non-stop</p>
+                            <p class="price green">Price: €120</p>
+                            <button class="book-btn">Book Now</button>
+                            <button class="details-btn">Details</button>
+                        </div>
+                        <div class="details-panel" style="display:none;">
+                            <h4>🛫 Essential Flight Details</h4>
+                            <p><strong>Airline:</strong> Air France <img src="images/airline-logo5.png" alt="Air France Logo" style="height: 70px; vertical-align: middle; margin-left: 5px;" /></p>
+                            <p><strong>Flight Number:</strong> AF321</p>
+                            <p><strong>Route:</strong> CDG - Charles de Gaulle &rarr; FCO - Rome Fiumicino</p>
+                            <p><strong>Layovers:</strong> None</p>
+                            <h4>📦 Additional Travel Info</h4>
+                            <p><strong>Cabin Baggage Allowance:</strong> 8kg</p>
+                            <p><strong>Checked Baggage Allowance:</strong> 23kg</p>
+                            <p><strong>Extra Baggage Options:</strong> Available for purchase</p>
+                            <h4>🛫 Class & Seat Type</h4>
+                            <p><strong>Class:</strong> Economy</p>
+                            <p><strong>Seat Type:</strong> Window</p>
+                            <h4>📋 Fare Rules</h4>
+                            <p><strong>Refundable:</strong> No</p>
+                            <p><strong>Free Date Changes:</strong> No</p>
+                            <p><strong>Cancellation Fees:</strong> €50</p>
+                            <p><strong>Rebooking Policy:</strong> Allowed with fee</p>
+                            <h4>✈️ Flight Features / Amenities</h4>
+                            <p><strong>Meals Included:</strong> Yes</p>
+                            <p><strong>In-flight Entertainment:</strong> Movies, Music</p>
+                            <p><strong>Wi-Fi Availability:</strong> Yes</p>
+                            <p><strong>Charging Ports:</strong> USB power available</p>
+                            <h4>🧾 Pricing & Fees</h4>
+                            <p><strong>Base Fare:</strong> €100</p>
+                            <p><strong>Taxes & Surcharges:</strong> €10</p>
+                            <p><strong>Service Fee:</strong> €10</p>
+                            <p><strong>Final Price per Passenger:</strong> €120</p>
+                            <h4>📋 Optional Add-ons & Extras</h4>
+                            <p><strong>Seat Selection:</strong> Available</p>
+                            <p><strong>Meal Preference:</strong> Available</p>
+                            <p><strong>Travel Insurance:</strong> Available</p>
+                            <p><strong>Priority Check-in / Boarding:</strong> Available</p>
+                            <p><strong>Lounge Access:</strong> Not Available</p>
+                            <h4>📍 Real-Time Info</h4>
+                            <p><strong>Gate Number:</strong> 15</p>
+                            <p><strong>Terminal Number:</strong> 2</p>
+                            <p><strong>Status:</strong> On-time</p>
+                            <p><strong>Boarding Time:</strong> 12:00 CET</p>
+                            <h4>🎯 User-Focused Extras</h4>
+                            <p><strong>Airline Rating:</strong> 4.1/5 (1800 reviews)</p>
+                            <p><strong>Punctuality Score:</strong> 89%</p>
+                            <p><strong>Comfort Rating:</strong> 4.0/5</p>
+                            <h4>✅ Environmental Data</h4>
+                            <p><strong>Carbon Emissions:</strong> Lower emissions flight</p>
+                            <p><strong>Sustainability Badges:</strong> Certified Green Airline</p>
+                        </div>
+                    </div>
+                    <div class="deal-card">
+                        <img src="images/airline-logo6.png" alt="Airline Logo" class="airline-logo" />
+                        <div class="flight-info">
+                            <h3>London &rarr; Dubai</h3>
+                            <p><i class="fa-solid fa-clock"></i> Duration: 6h 50m</p>
+                            <p><i class="fa-solid fa-plane"></i> Stops: Non-stop</p>
+                            <p class="price red">Price: £400</p>
+                            <button class="book-btn">Book Now</button>
+                            <button class="details-btn">Details</button>
+                        </div>
+                        <div class="details-panel" style="display:none;">
+                            <h4>🛫 Essential Flight Details</h4>
+                            <p><strong>Airline:</strong> British Airways <img src="images/airline-logo6.png" alt="British Airways Logo" style="height: 70px; vertical-align: middle; margin-left: 5px;" /></p>
+                            <p><strong>Flight Number:</strong> BA456</p>
+                            <p><strong>Route:</strong> LHR - London Heathrow &rarr; DXB - Dubai Intl</p>
+                            <p><strong>Layovers:</strong> None</p>
+                            <h4>📦 Additional Travel Info</h4>
+                            <p><strong>Cabin Baggage Allowance:</strong> 7kg</p>
+                            <p><strong>Checked Baggage Allowance:</strong> 23kg</p>
+                            <p><strong>Extra Baggage Options:</strong> Available for purchase</p>
+                            <h4>🛫 Class & Seat Type</h4>
+                            <p><strong>Class:</strong> Business</p>
+                            <p><strong>Seat Type:</strong> Extra legroom</p>
+                            <h4>📋 Fare Rules</h4>
+                            <p><strong>Refundable:</strong> Yes</p>
+                            <p><strong>Free Date Changes:</strong> Yes</p>
+                            <p><strong>Cancellation Fees:</strong> £150</p>
+                            <p><strong>Rebooking Policy:</strong> Allowed without fee</p>
+                            <h4>✈️ Flight Features / Amenities</h4>
+                            <p><strong>Meals Included:</strong> Yes</p>
+                            <p><strong>In-flight Entertainment:</strong> Movies, Music, Wi-Fi</p>
+                            <p><strong>Wi-Fi Availability:</strong> Yes</p>
+                            <p><strong>Charging Ports:</strong> USB and power outlets</p>
+                            <h4>🧾 Pricing & Fees</h4>
+                            <p><strong>Base Fare:</strong> £350</p>
+                            <p><strong>Taxes & Surcharges:</strong> £30</p>
+                            <p><strong>Service Fee:</strong> £20</p>
+                            <p><strong>Final Price per Passenger:</strong> £400</p>
+                            <h4>📋 Optional Add-ons & Extras</h4>
+                            <p><strong>Seat Selection:</strong> Available</p>
+                            <p><strong>Meal Preference:</strong> Available</p>
+                            <p><strong>Travel Insurance:</strong> Available</p>
+                            <p><strong>Priority Check-in / Boarding:</strong> Available</p>
+                            <p><strong>Lounge Access:</strong> Available</p>
+                            <h4>📍 Real-Time Info</h4>
+                            <p><strong>Gate Number:</strong> 18</p>
+                            <p><strong>Terminal Number:</strong> 5</p>
+                            <p><strong>Status:</strong> On-time</p>
+                            <p><strong>Boarding Time:</strong> 13:00 GMT</p>
+                            <h4>🎯 User-Focused Extras</h4>
+                            <p><strong>Airline Rating:</strong> 4.4/5 (2500 reviews)</p>
+                            <p><strong>Punctuality Score:</strong> 92%</p>
+                            <p><strong>Comfort Rating:</strong> 4.3/5</p>
+                            <h4>✅ Environmental Data</h4>
+                            <p><strong>Carbon Emissions:</strong> Lower emissions flight</p>
+                            <p><strong>Sustainability Badges:</strong> Certified Green Airline</p>
+                        </div>
+                    </div>
+                    <div class="deal-card">
+                        <img src="images/airline-logo7.png" alt="Airline Logo" class="airline-logo" />
+                        <div class="flight-info">
+                            <h3>Bengluru &rarr; Singapore</h3>
+                            <p><i class="fa-solid fa-clock"></i> Duration: 3h 45m</p>
+                            <p><i class="fa-solid fa-plane"></i> Stops: Non-stop</p>
+                            <p class="price red">Price: Rs.28,700</p>
+                            <button class="book-btn">Book Now</button>
+                            <button class="details-btn">Details</button>
+                        </div>
+                        <div class="details-panel" style="display:none;">
+                            <h4>🛫 Essential Flight Details</h4>
+                            <p><strong>Airline:</strong> Singapore Airlines <img src="images/airline-logo7.png" alt="Singapore Airlines Logo" style="height: 70px; vertical-align: middle; margin-left: 5px;" /></p>
+                            <p><strong>Flight Number:</strong> SQ789</p>
+                            <p><strong>Route:</strong> BLR - Kempegowda Intl &rarr; SIN - Changi Intl</p>
+                            <p><strong>Layovers:</strong> None</p>
+                            <h4>📦 Additional Travel Info</h4>
+                            <p><strong>Cabin Baggage Allowance:</strong> 7kg</p>
+                            <p><strong>Checked Baggage Allowance:</strong> 30kg</p>
+                            <p><strong>Extra Baggage Options:</strong> Available for purchase</p>
+                            <h4>🛫 Class & Seat Type</h4>
+                            <p><strong>Class:</strong> Economy Saver</p>
+                            <p><strong>Seat Type:</strong> Standard</p>
+                            <h4>📋 Fare Rules</h4>
+                            <p><strong>Refundable:</strong> No</p>
+                            <p><strong>Free Date Changes:</strong> No</p>
+                            <p><strong>Cancellation Fees:</strong> Rs.2000</p>
+                            <p><strong>Rebooking Policy:</strong> Allowed with fee</p>
+                            <h4>✈️ Flight Features / Amenities</h4>
+                            <p><strong>Meals Included:</strong> Yes</p>
+                            <p><strong>In-flight Entertainment:</strong> Movies, Music</p>
+                            <p><strong>Wi-Fi Availability:</strong> Yes</p>
+                            <p><strong>Charging Ports:</strong> USB power available</p>
+                            <h4>🧾 Pricing & Fees</h4>
+                            <p><strong>Base Fare:</strong> Rs.25000</p>
+                            <p><strong>Taxes & Surcharges:</strong> Rs.2000</p>
+                            <p><strong>Service Fee:</strong> Rs.1700</p>
+                            <p><strong>Final Price per Passenger:</strong> Rs.28700</p>
+                            <h4>📋 Optional Add-ons & Extras</h4>
+                            <p><strong>Seat Selection:</strong> Available</p>
+                            <p><strong>Meal Preference:</strong> Available</p>
+                            <p><strong>Travel Insurance:</strong> Available</p>
+                            <p><strong>Priority Check-in / Boarding:</strong> Available</p>
+                            <p><strong>Lounge Access:</strong> Not Available</p>
+                            <h4>📍 Real-Time Info</h4>
+                            <p><strong>Gate Number:</strong> 7</p>
+                            <p><strong>Terminal Number:</strong> 1</p>
+                            <p><strong>Status:</strong> On-time</p>
+                            <p><strong>Boarding Time:</strong> 09:45 IST</p>
+                            <h4>🎯 User-Focused Extras</h4>
+                            <p><strong>Airline Rating:</strong> 4.6/5 (3500 reviews)</p>
+                            <p><strong>Punctuality Score:</strong> 92%</p>
+                            <p><strong>Comfort Rating:</strong> 4.3/5</p>
+                            <h4>✅ Environmental Data</h4>
+                            <p><strong>Carbon Emissions:</strong> Lower emissions flight</p>
+                            <p><strong>Sustainability Badges:</strong> Certified Green Airline</p>
+                        </div>
+                    </div>
+                    <div class="deal-card">
+                        <img src="images/airline-logo8.png" alt="Airline Logo" class="airline-logo" />
+                        <div class="flight-info">
+                            <h3>Ahmedabad &rarr; Muscat</h3>
+                            <p><i class="fa-solid fa-clock"></i> Duration: 3h 10m</p>
+                            <p><i class="fa-solid fa-plane"></i> Stops: Non-stop</p>
+                            <p class="price red">Price: Rs.16,800</p>
+                            <button class="book-btn">Book Now</button>
+                            <button class="details-btn">Details</button>
+                        </div>
+                        <div class="details-panel" style="display:none;">
+                            <h4>🛫 Essential Flight Details</h4>
+                            <p><strong>Airline:</strong> Oman Air <img src="images/airline-logo8.png" alt="Oman Air Logo" style="height: 70px; vertical-align: middle; margin-left: 5px;" /></p>
+                            <p><strong>Flight Number:</strong> WY123</p>
+                            <p><strong>Route:</strong> AMD - Sardar Vallabhbhai Patel Intl &rarr; MCT - Muscat Intl</p>
+                            <p><strong>Layovers:</strong> None</p>
+                            <h4>📦 Additional Travel Info</h4>
+                            <p><strong>Cabin Baggage Allowance:</strong> 7kg</p>
+                            <p><strong>Checked Baggage Allowance:</strong> 25kg</p>
+                            <p><strong>Extra Baggage Options:</strong> Available for purchase</p>
+                            <h4>🛫 Class & Seat Type</h4>
+                            <p><strong>Class:</strong> Economy Value</p>
+                            <p><strong>Seat Type:</strong> Standard</p>
+                            <h4>📋 Fare Rules</h4>
+                            <p><strong>Refundable:</strong> No</p>
+                            <p><strong>Free Date Changes:</strong> No</p>
+                            <p><strong>Cancellation Fees:</strong> Rs.1500</p>
+                            <p><strong>Rebooking Policy:</strong> Allowed with fee</p>
+                            <h4>✈️ Flight Features / Amenities</h4>
+                            <p><strong>Meals Included:</strong> Yes</p>
+                            <p><strong>In-flight Entertainment:</strong> Music</p>
+                            <p><strong>Wi-Fi Availability:</strong> No</p>
+                            <p><strong>Charging Ports:</strong> USB power available</p>
+                            <h4>🧾 Pricing & Fees</h4>
+                            <p><strong>Base Fare:</strong> Rs.14000</p>
+                            <p><strong>Taxes & Surcharges:</strong> Rs.1800</p>
+                            <p><strong>Service Fee:</strong> Rs.1000</p>
+                            <p><strong>Final Price per Passenger:</strong> Rs.16800</p>
+                            <h4>📋 Optional Add-ons & Extras</h4>
+                            <p><strong>Seat Selection:</strong> Available</p>
+                            <p><strong>Meal Preference:</strong> Available</p>
+                            <p><strong>Travel Insurance:</strong> Available</p>
+                            <p><strong>Priority Check-in / Boarding:</strong> Available</p>
+                            <p><strong>Lounge Access:</strong> Not Available</p>
+                            <h4>📍 Real-Time Info</h4>
+                            <p><strong>Gate Number:</strong> 9</p>
+                            <p><strong>Terminal Number:</strong> 1</p>
+                            <p><strong>Status:</strong> On-time</p>
+                            <p><strong>Boarding Time:</strong> 11:15 IST</p>
+                            <h4>🎯 User-Focused Extras</h4>
+                            <p><strong>Airline Rating:</strong> 4.1/5 (900 reviews)</p>
+                            <p><strong>Punctuality Score:</strong> 87%</p>
+                            <p><strong>Comfort Rating:</strong> 3.9/5</p>
+                            <h4>✅ Environmental Data</h4>
+                            <p><strong>Carbon Emissions:</strong> Standard emissions</p>
+                            <p><strong>Sustainability Badges:</strong> None</p>
+                        </div>
+                    </div>
+                    <div class="deal-card">
+                        <img src="images/airline-logo9.png" alt="Airline Logo" class="airline-logo" />
+                        <div class="flight-info">
+                            <h3>Chennai &rarr; Kochi</h3>
+                            <p><i class="fa-solid fa-clock"></i> Duration: 1h 10m</p>
+                            <p><i class="fa-solid fa-plane"></i> Stops: Non-stop</p>
+                            <p class="price green">Price: Rs.2,300</p>
+                            <button class="book-btn">Book Now</button>
+                            <button class="details-btn">Details</button>
+                        </div>
+                        <div class="details-panel" style="display:none;">
+                            <h4>🛫 Essential Flight Details</h4>
+                            <p><strong>Airline:</strong> Air India Express <img src="images/airline-logo9.png" alt="Air India Express Logo" style="height: 70px; vertical-align: middle; margin-left: 5px;" /></p>
+                            <p><strong>Flight Number:</strong> IX789</p>
+                            <p><strong>Route:</strong> MAA - Chennai Intl &rarr; COK - Cochin Intl</p>
+                            <p><strong>Layovers:</strong> None</p>
+                            <h4>📦 Additional Travel Info</h4>
+                            <p><strong>Cabin Baggage Allowance:</strong> 7kg</p>
+                            <p><strong>Checked Baggage Allowance:</strong> 15kg</p>
+                            <p><strong>Extra Baggage Options:</strong> Available for purchase</p>
+                            <h4>🛫 Class & Seat Type</h4>
+                            <p><strong>Class:</strong> Super Saver</p>
+                            <p><strong>Seat Type:</strong> Standard</p>
+                            <h4>📋 Fare Rules</h4>
+                            <p><strong>Refundable:</strong> No</p>
+                            <p><strong>Free Date Changes:</strong> No</p>
+                            <p><strong>Cancellation Fees:</strong> Rs.1000</p>
+                            <p><strong>Rebooking Policy:</strong> Allowed with fee</p>
+                            <h4>✈️ Flight Features / Amenities</h4>
+                            <p><strong>Meals Included:</strong> No</p>
+                            <p><strong>In-flight Entertainment:</strong> None</p>
+                            <p><strong>Wi-Fi Availability:</strong> No</p>
+                            <p><strong>Charging Ports:</strong> USB power available</p>
+                            <h4>🧾 Pricing & Fees</h4>
+                            <p><strong>Base Fare:</strong> Rs.2000</p>
+                            <p><strong>Taxes & Surcharges:</strong> Rs.200</p>
+                            <p><strong>Service Fee:</strong> Rs.100</p>
+                            <p><strong>Final Price per Passenger:</strong> Rs.2300</p>
+                            <h4>📋 Optional Add-ons & Extras</h4>
+                            <p><strong>Seat Selection:</strong> Available</p>
+                            <p><strong>Meal Preference:</strong> Available</p>
+                            <p><strong>Travel Insurance:</strong> Available</p>
+                            <p><strong>Priority Check-in / Boarding:</strong> Available</p>
+                            <p><strong>Lounge Access:</strong> Not Available</p>
+                            <h4>📍 Real-Time Info</h4>
+                            <p><strong>Gate Number:</strong> 6</p>
+                            <p><strong>Terminal Number:</strong> 1</p>
+                            <p><strong>Status:</strong> On-time</p>
+                            <p><strong>Boarding Time:</strong> 15:00 IST</p>
+                            <h4>🎯 User-Focused Extras</h4>
+                            <p><strong>Airline Rating:</strong> 3.8/5 (800 reviews)</p>
+                            <p><strong>Punctuality Score:</strong> 82%</p>
+                            <p><strong>Comfort Rating:</strong> 3.5/5</p>
+                            <h4>✅ Environmental Data</h4>
+                            <p><strong>Carbon Emissions:</strong> Standard emissions</p>
+                            <p><strong>Sustainability Badges:</strong> None</p>
+                        </div>
+                    </div>
+                    <div class="deal-card">
+                        <img src="images/airline-logo10.png" alt="Airline Logo" class="airline-logo" />
+                        <div class="flight-info">
+                            <h3>Mumbai &rarr; Jaipur</h3>
+                            <p><i class="fa-solid fa-clock"></i> Duration: 1h 50m</p>
+                            <p><i class="fa-solid fa-plane"></i> Stops: Non-stop</p>
+                            <p class="price green">Price: Rs.3,999</p>
+                            <button class="book-btn">Book Now</button>
+                            <button class="details-btn">Details</button>
+                        </div>
+                        <div class="details-panel" style="display:none;">
+                            <h4>🛫 Essential Flight Details</h4>
+                            <p><strong>Airline:</strong> Air India Regional <img src="images/airline-logo10.png" alt="Air India Regional Logo" style="height: 70px; vertical-align: middle; margin-left: 5px;" /></p>
+                            <p><strong>Flight Number:</strong> AI789</p>
+                            <p><strong>Route:</strong> BOM - Chhatrapati Shivaji Intl &rarr; JAI - Jaipur Intl</p>
+                            <p><strong>Layovers:</strong> None</p>
+                            <h4>📦 Additional Travel Info</h4>
+                            <p><strong>Cabin Baggage Allowance:</strong> 7kg</p>
+                            <p><strong>Checked Baggage Allowance:</strong> 20kg</p>
+                            <p><strong>Extra Baggage Options:</strong> Available for purchase</p>
+                            <h4>🛫 Class & Seat Type</h4>
+                            <p><strong>Class:</strong> Basic Economy</p>
+                            <p><strong>Seat Type:</strong> Standard</p>
+                            <h4>📋 Fare Rules</h4>
+                            <p><strong>Refundable:</strong> No</p>
+                            <p><strong>Free Date Changes:</strong> No</p>
+                            <p><strong>Cancellation Fees:</strong> Rs.1200</p>
+                            <p><strong>Rebooking Policy:</strong> Allowed with fee</p>
+                            <h4>✈️ Flight Features / Amenities</h4>
+                            <p><strong>Meals Included:</strong> No</p>
+                            <p><strong>In-flight Entertainment:</strong> None</p>
+                            <p><strong>Wi-Fi Availability:</strong> No</p>
+                            <p><strong>Charging Ports:</strong> USB power available</p>
+                            <h4>🧾 Pricing & Fees</h4>
+                            <p><strong>Base Fare:</strong> Rs.3000</p>
+                            <p><strong>Taxes & Surcharges:</strong> Rs.500</p>
+                            <p><strong>Service Fee:</strong> Rs.499</p>
+                            <p><strong>Final Price per Passenger:</strong> Rs.3999</p>
+                            <h4>📋 Optional Add-ons & Extras</h4>
+                            <p><strong>Seat Selection:</strong> Available</p>
+                            <p><strong>Meal Preference:</strong> Available</p>
+                            <p><strong>Travel Insurance:</strong> Available</p>
+                            <p><strong>Priority Check-in / Boarding:</strong> Available</p>
+                            <p><strong>Lounge Access:</strong> Not Available</p>
+                            <h4>📍 Real-Time Info</h4>
+                            <p><strong>Gate Number:</strong> 10</p>
+                            <p><strong>Terminal Number:</strong> 2</p>
+                            <p><strong>Status:</strong> On-time</p>
+                            <p><strong>Boarding Time:</strong> 17:00 IST</p>
+                            <h4>🎯 User-Focused Extras</h4>
+                            <p><strong>Airline Rating:</strong> 3.9/5 (1100 reviews)</p>
+                            <p><strong>Punctuality Score:</strong> 84%</p>
+                            <p><strong>Comfort Rating:</strong> 3.7/5</p>
+                            <h4>✅ Environmental Data</h4>
+                            <p><strong>Carbon Emissions:</strong> Standard emissions</p>
+                            <p><strong>Sustainability Badges:</strong> None</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Promotional Deals -->
+        <section class="promotional-deals">
+            <h2>Promotional Deals</h2>
+            <div class="deals-list">
+                <div class="deal-card">
+                    <h3>🔥 Top 5 Cheapest Flights Today</h3>
+                    <p>Save big on your next trip with our exclusive deals!</p>
+                </div>
+                <div class="deal-card">
+                    <h3>🎉 Flat 20% OFF on Early Bookings</h3>
+                    <p>Book early and enjoy great discounts on select flights.</p>
+                </div>
+                <div class="deal-card">
+                    <h3>✈️ Special Weekend Offers</h3>
+                    <p>Weekend getaways at unbeatable prices.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer style="background-color: #343a40; color: white; padding: 1rem; text-align: center; margin-top: 2rem;">
+        <p>&copy; 2024 The Heritage Luxe. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Update price range display
+        const priceRange = document.getElementById('priceRange');
+        const priceValue = document.getElementById('priceValue');
+        priceRange.addEventListener('input', () => {
+            priceValue.textContent = '$' + priceRange.value;
+        });
+
+        // Placeholder for search and filter functionality
+        document.getElementById('searchForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Search functionality is not implemented yet.');
+        });
+        document.getElementById('filtersForm').addEventListener('change', () => {
+            alert('Filter functionality is not implemented yet.');
+        });
+    </script>
+    <script src="js/flight-details.js"></script>
+    <script src="js/flight-details-modal.js"></script>
+    <!-- Flight Details Modal -->
+    <div id="flightDetailsModal" class="modal" style="display:none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5);">
+        <div class="modal-content" style="background-color: #fff; margin: 10% auto; padding: 20px; border-radius: 8px; width: 80%; max-width: 600px; position: relative;">
+            <span id="modalCloseBtn" style="position: absolute; top: 10px; right: 20px; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
+            <h2 id="modalFlightRoute">Flight Route</h2>
+            <p id="modalFlightPrice">Price</p>
+            <p id="modalFlightDates">Dates</p>
+            <button id="modalBookBtn" style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Book Now</button>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+    <script src="js/script-main.js"></script>
+    </body>
+</html>

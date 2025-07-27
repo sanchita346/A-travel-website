@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Contact - The Heritage Luxe</title>
+        <link rel="stylesheet" href="css/styles.css" />
+        <link rel="stylesheet" href="css/about-contact-destinations.css" />
+    </head>
+<body>
+    <header>
+        <div class="top-nav sticky">
+            <div class="logo">
+                <img src="images/logo-new.png" alt="The Heritage Luxe Logo" style="height: 40px; width: auto; margin-right: 10px;" />
+                The Heritage Luxe
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="flights.html">Flights</a></li>
+                    <li><a href="hotels.html">Hotels</a></li>
+                    <li><a href="destinations.html">Destinations</a></li>
+                    <li><a href="about-us.html">About Us</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                    <li><a href="auth.html">Login</a></li>
+                </ul>
+            </nav>
+            <button class="sign-up-btn" onclick="window.location.href='auth.html'">Sign Up</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="contact-hero">
+            <h1>We’d Love to Hear From You!</h1>
+            <p>Reach out with any questions, comments, or to start planning your next adventure.</p>
+        </section>
+
+        <section class="contact-content">
+            <div class="contact-form-container">
+                <form id="contactForm" class="contact-form">
+                    <label for="name">Name<span class="required">*</span></label>
+                    <input type="text" id="name" name="name" placeholder="Your full name" required />
+
+                    <label for="email">Email<span class="required">*</span></label>
+                    <input type="email" id="email" name="email" placeholder="Your email address" required />
+
+                    <label for="topic">Topic</label>
+                    <select id="topic" name="topic">
+                        <option value="">Select a topic (optional)</option>
+                        <option value="general">General Inquiry</option>
+                        <option value="booking">Booking Support</option>
+                        <option value="feedback">Feedback</option>
+                    </select>
+
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Your message here..." rows="5"></textarea>
+
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+                <div id="formMessage" class="form-message"></div>
+            </div>
+
+            <div class="contact-info">
+                <h2>Contact Information</h2>
+                <p>Email: <a href="mailto:support@theheritageluxe.com">support@theheritageluxe.com</a></p>
+                <p>Phone: <a href="tel:+1234567890">+1 (234) 567-890</a></p>
+                <p>Address: 123 Luxe Street, Travel City, Country</p>
+                <p>Business Hours: Mon-Fri, 9am - 6pm (GMT+5:30)</p>
+
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#" class="social-btn facebook" aria-label="Facebook">F</a>
+                    <a href="#" class="social-btn twitter" aria-label="Twitter">T</a>
+                    <a href="#" class="social-btn instagram" aria-label="Instagram">I</a>
+                    <a href="#" class="social-btn linkedin" aria-label="LinkedIn">L</a>
+                </div>
+
+                <h3>Our Location</h3>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!..." width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </section>
+
+        <section class="contact-faq">
+            <h2>Frequently Asked Questions</h2>
+            <ul>
+                <li><strong>How long does it take to get a response?</strong> We typically reply within 24-48 business hours.</li>
+                <li><strong>Can I change my booking?</strong> Yes, please contact our support team for assistance.</li>
+                <li><strong>Do you offer group discounts?</strong> Yes, contact us for group travel inquiries.</li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer style="background-color: #343a40; color: white; padding: 1rem; text-align: center; margin-top: 2rem;">
+        <p>&copy; 2024 The Heritage Luxe. All rights reserved.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
